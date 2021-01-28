@@ -1,24 +1,26 @@
+//copied from activity 20
 import React, { Component } from "react";
-// import Container from "./Container";
-// import Row from "./Row";
-// import Col from "./Col";
-// import Card from "./Card";
+import { Container, Row, Col, Card } from "react-bootstrap";
+
 import SearchForm from "./SearchForm";
-import DataTable from "./DataTable";
-import API from "../utils/API";
+import TableData from "./TableData";
 
 class MainContainer extends Component {
-  state = {
-    result: {},
-    search: "",
-  };
+  //   state = {
+  //     result: {},
+  //     search: "",
+  //   };
 
-  loadData = () => {
-    API.getData()
-      .then((res) => console.log(res))
-      //   this.setState({ result: res.results }))
-      .catch((err) => console.log(err));
-  };
+  // sort n render name on click??
+
+  // searched n render data on search
+
+  //   loadData = () => {
+  //     API.getData()
+  //       .then((res) => console.log(res))
+  //       //   this.setState({ result: res.results }))
+  //       .catch((err) => console.log(err));
+  //   };
 
   render() {
     return (
@@ -33,7 +35,7 @@ class MainContainer extends Component {
               // handleFormSubmit={this.handleFormSubmit}
               />
             </Card>
-            <DataTable />
+            <TableData />
           </Col>
         </Row>
       </Container>
