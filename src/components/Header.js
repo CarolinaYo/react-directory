@@ -10,7 +10,6 @@ function Header() {
         width: "100%",
         textAlign: "center",
         padding: "20px",
-        marginBottom: "5px",
       }}
     >
       <h1>Employee Directory</h1>
