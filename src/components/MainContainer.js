@@ -8,6 +8,8 @@ import TableData from "./TableData";
 class MainContainer extends Component {
   state = {
     employees: [],
+    order: "ascend",
+    search: "",
   };
 
   // sort n render name on click??
@@ -22,6 +24,11 @@ class MainContainer extends Component {
   componentDidMount() {
     this.getEmployees();
   }
+
+  handleFormSubmit = (event) => {
+    event.preventDefault();
+    this.getEmployees(this.state.search);
+  };
 
   render() {
     return (
