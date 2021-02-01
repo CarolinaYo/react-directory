@@ -11,7 +11,7 @@ function TableData(props) {
           <tr>
             <th>#</th>
             <th>Picture</th>
-            <th>Name</th>
+            <th onClick={props.handleSortbyName}>Name</th>
             <th>Email</th>
             <th>Phone Number</th>
           </tr>
