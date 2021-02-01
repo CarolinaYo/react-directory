@@ -4,6 +4,7 @@ import { Table } from "react-bootstrap";
 import TableDataBody from "./TableDataBody";
 
 function TableData(props) {
+  // const onSort = props;
   return (
     <div className="text-center">
       <Table striped bordered hover size="sm">
@@ -11,8 +12,8 @@ function TableData(props) {
           <tr>
             <th>#</th>
             <th>Picture</th>
-            <th onClick={props.handleSortbyName}>Name</th>
-            <th>Email</th>
+            <th onClick={() => props.onSort("name.first")}>Name</th>
+            <th onClick={() => props.onSort("email")}>Email</th>
             <th>Phone Number</th>
           </tr>
         </thead>
