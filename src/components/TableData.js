@@ -1,6 +1,5 @@
 import React from "react";
 import { Table } from "react-bootstrap";
-
 import TableDataBody from "./TableDataBody";
 
 function TableData(props) {
@@ -12,7 +11,7 @@ function TableData(props) {
           <tr>
             <th>#</th>
             <th>Picture</th>
-            <th onClick={() => props.onSort("name.first")}>Name</th>
+            <th onClick={() => props.onSort("name")}>Name</th>
             <th onClick={() => props.onSort("email")}>Email</th>
             <th>Phone Number</th>
           </tr>

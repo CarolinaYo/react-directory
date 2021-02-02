@@ -4,83 +4,123 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import API from "../utils/API";
 import SearchForm from "./SearchForm";
 import TableData from "./TableData";
-import _ from "lodash";
 
 class MainContainer extends Component {
   state = {
     employees: [],
+    filteredEmployees: [],
     search: "",
-    sortColumn: { path: "name.first", order: "asc" },
+    sortOrder: "asc",
   };
 
-  // sort n render name on click??
-
+  //Getting data from API
   getEmployees = () => {
     API.getRandomUser()
-      .then((res) => this.setState({ employees: res.data.results }))
+      .then((res) => {
+        this.setState({ employees: res.data.results });
+        // A copy of the same data for manipulation
+        this.setState({ filteredEmployees: res.data.results });
+      })
       .catch((err) => console.log(err));
   };
   componentDidMount() {
     this.getEmployees();
   }
 
-  handleSort = (path) => {
-    // console.log("path:", path);
-    //using lodash, sorting ascending and descending
-    const sortColumn = { ...this.state.sortColumn };
-    if (sortColumn.path === path)
-      sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
-    else {
-      sortColumn.path = path;
-      sortColumn.order = "asc";
+  //Sorting by name in ascending and descending
+  handleSort = (colName) => {
+    let sort;
+    // console.log(this.state.sortOrder);
+
+    if (colName === "name") {
+      if (this.state.sortOrder === "asc") {
+        sort = this.state.filteredEmployees.sort((a, b) => {
+          //   let nameA = a.name.first.toUpperCase();
+
+          let nameA = a["name"].first.toUpperCase();
+          //   let nameB = b.name.first.toUpperCase();
+          let nameB = b["name"].first.toUpperCase();
+
+          if (nameA < nameB) {
+            return -1;
+          } else if (nameA > nameB) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        this.setState({ sortOrder: "desc" });
+      } else {
+        sort = this.state.filteredEmployees.sort((a, b) => {
+          //   let nameA = a.name.first.toUpperCase();
+
+          let nameA = a["name"].first.toUpperCase();
+          //   let nameB = b.name.first.toUpperCase();
+          let nameB = b["name"].first.toUpperCase();
+
+          if (nameA > nameB) {
+            return -1;
+          } else if (nameA < nameB) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        this.setState({ sortOrder: "asc" });
+      }
+    } else {
+      //Sorting by email in ascending and descending
+      if (this.state.sortOrder === "asc") {
+        sort = this.state.filteredEmployees.sort((a, b) => {
+          let nameA = a.email;
+          let nameB = b.email;
+
+          if (nameA < nameB) {
+            return -1;
+          } else if (nameA > nameB) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        this.setState({ sortOrder: "desc" });
+      } else {
+        sort = this.state.filteredEmployees.sort((a, b) => {
+          let nameA = a.email;
+          let nameB = b.email;
+
+          if (nameA > nameB) {
+            return -1;
+          } else if (nameA < nameB) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        this.setState({ sortOrder: "asc" });
+      }
     }
-    this.setState({ sortColumn });
 
-    //this only sort ascending
-    // this.setState({ sortColumn: { path: path, order: "asc" } });
-
-    const sorted = _.orderBy(
-      this.state.employees,
-      [this.state.sortColumn.path],
-      [this.state.sortColumn.order]
-    );
-    this.setState({ employees: sorted });
-
-    // const sort = this.state.employees.sort((a, b) => {
-    //   let nameA = a.name.first.toUpperCase();
-    //   let nameB = b.name.first.toUpperCase();
-
-    //   if (nameA < nameB) {
-    //     return -1;
-    //   } else if (nameA > nameB) {
-    //     return 1;
-    //   } else {
-    //     return 0;
-    //   }
-    // });
-    // this.setState({ employees: sort });
+    this.setState({ filteredEmployees: sort });
   };
 
-  //   searchEmployees = (query) => {
-  //     API.getRandomUser(query)
-  //       .then((res) => this.setState({ search: res.data.results }))
-  //       .catch((err) => console.log(err));
-  //   };
-  // searched n render data on button click
-  //   handleFormSubmit = (event) => {
-  //     event.preventDefault();
-  //     this.searchEmployees(this.state.search);
-  //   };
-
-  //   filter data on value change
+  //Filter data on value change
   handleInputChange = (event) => {
     const filter = event.target.value;
-    const filteredList = this.state.employees.filter((item) => {
-      let values = item.name.first.toLowerCase();
-      return values.indexOf(filter.toLwerCase()) !== -1;
-    });
-    this.setState({ employees: filteredList });
-    //filtering
+    //Store value in search state
+    this.setState({ search: filter });
+    if (!filter) {
+      //Calling original data when nothing in the value
+      this.setState({ filteredEmployees: this.state.employees });
+    } else {
+      //Show data using filter method
+      const filteredList = this.state.filteredEmployees.filter((item) => {
+        let values = item.name.first.toLowerCase();
+        return values.indexOf(filter.toLowerCase()) !== -1;
+      });
+
+      this.setState({ filteredEmployees: filteredList });
+    }
   };
 
   render() {
@@ -94,7 +134,7 @@ class MainContainer extends Component {
             />
             <Card heading="Search">
               <TableData
-                employees={this.state.employees}
+                employees={this.state.filteredEmployees}
                 onSort={this.handleSort}
               />
             </Card>
