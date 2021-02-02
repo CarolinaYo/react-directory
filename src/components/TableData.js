@@ -3,7 +3,6 @@ import { Table } from "react-bootstrap";
 import TableDataBody from "./TableDataBody";
 
 function TableData(props) {
-  // const onSort = props;
   return (
     <div className="text-center">
       <Table striped bordered hover size="sm">
@@ -11,8 +10,18 @@ function TableData(props) {
           <tr>
             <th>#</th>
             <th>Picture</th>
-            <th onClick={() => props.onSort("name")}>Name</th>
-            <th onClick={() => props.onSort("email")}>Email</th>
+            <th
+              onClick={() => props.onSort("name")}
+              style={{ cursor: "pointer" }}
+            >
+              Name
+            </th>
+            <th
+              onClick={() => props.onSort("email")}
+              style={{ cursor: "pointer" }}
+            >
+              Email
+            </th>
             <th>Phone Number</th>
           </tr>
         </thead>

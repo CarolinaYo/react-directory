@@ -1,6 +1,6 @@
 # React Employee Directory
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). This applicatin is an employee directory using data from an open-souce API [Random User Generator](https://https://randomuser.me/) to populate random data and then formed a directory. User can perform search and sort functionality to narrow down the list of the employee. This app allows a search by name and sort by employee's firstname.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). This applicatin is an employee directory using data from an open-souce API [Random User Generator](https://https://randomuser.me/) to populate random data and then formed a directory. User can perform search and sort functionality to narrow down the list of the employee. This app allows a search by name and sort by employee's name or email address .
 
 # User Story
 
