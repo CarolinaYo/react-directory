@@ -25,8 +25,8 @@ Deployed Link: https://carolinayo.github.io/react-employeeDirectory/
 
 ### Functionality
 
-- This application will allow user to sort in ascending and descending order from the column **Name** and **Email**.
-- This application allows user to narrow down the list of employee by performing a **search** by entering any letter of the **employee's name**. \
+- This application allows user to sort in ascending and descending order from the column **Name** and **Email**.
+- User can narrow down the list of employee by performing a **search** action by entering any letter of the **employee's name**. \
   ![Employee Directory Demo](./public/images/employeeDirectory.gif)
 
 ## MAINTAINER
